@@ -7,7 +7,7 @@ class TestGameState(unittest.TestCase):
     def setUp(self):
         self.gamestate = GameState()
     
-    def test_n_n_grid_as_board(self):
+    def test_n_n_grid_as_board_created(self):
         self.assertEqual(self.gamestate.grid["values"][0][1], ".")
 
     def test_returns_correct_player(self):
@@ -15,6 +15,15 @@ class TestGameState(unittest.TestCase):
         self.assertEqual(id_1, 0)
         self.assertEqual(id_2, 1)
         self.assertEqual(self.gamestate.player(), 0)
+    
+    def test_terminate_false_2_2_grid(self):
+        return True
+
+    def test_terminate_true_5_5_grid(self):
+        return True
+
+    def test_terminate_false_5_5_grid(self):
+        return True
 
 
 

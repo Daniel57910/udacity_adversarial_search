@@ -1,3 +1,4 @@
+from player import Player
 
 class GameState:
 
@@ -5,8 +6,10 @@ class GameState:
         self.player_count = -1
         self.board_size = 2
         self.grid = self._build_grid()
-        
-        
+        self.player_1 = Player("X")
+        self.player_2 = Player("!")
+
+    
     def actions(self):
         """ Return a list of legal actions for the active player 
         
@@ -55,15 +58,7 @@ class GameState:
 
     def _build_grid(self):
         grid = {}
-        grid["rows"] = [i for i in range(0, self.board_size)]
-        grid["cols"] = [i for i in range(0, self.board_size)]
-        value = []
-        for i in range(self.board_size):
-            current = []
-            for j in range(self.board_size):
-                current.append(".")
-            value.append(current)
-        grid["values"] = value
+        grid["values"] = [["." for i in range(self.board_size)] for j in range(self.board_size)]
         return grid
             
 
