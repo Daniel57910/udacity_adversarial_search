@@ -4,13 +4,17 @@ class GameState:
 
     def __init__(self):
         self.player_count = -1
-        self.board_size = 2
+        self.board_size = 5
         self.grid = self._build_grid()
+        self.players = [Player("X"), Player("!")]
         self.player_1 = Player("X")
         self.player_2 = Player("!")
 
     
     def actions(self):
+        current_player = self.players[self.player()]
+        actions = current_player.identify_legal_actions
+        
         """ Return a list of legal actions for the active player 
         
         You are free to choose any convention to represent actions,
