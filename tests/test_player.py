@@ -35,5 +35,7 @@ class TestPlayer(unittest.TestCase):
         self.player.pos(2, 2)
         grid = self.game_state.grid
         grid[2][2] = "!"
-        print(grid)
-        
+        filled_values = [(1, 2), (2, 4), (3, 4), (4, 2)]
+        for (a, b) in filled_values:
+            grid[a][b] = "X"
+        self.player.identify_legal_actions(grid)

@@ -10,8 +10,9 @@ class Player:
         self.loc["X"] = x
         self.loc["Y"] = y
 
-    def identify_legal_actions(self):
+    def identify_legal_actions(self, grid: dict):
         possible_actions = self._all_actions()
+        print(possible_actions)
 
     def _all_actions(self) -> dict:
         actions = {}

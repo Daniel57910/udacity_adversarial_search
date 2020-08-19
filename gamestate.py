@@ -61,8 +61,6 @@ class GameState:
         pass
 
     def _build_grid(self):
-        grid = {}
-        grid["values"] = [["." for i in range(self.board_size)] for j in range(self.board_size)]
-        return grid
+        return [["." for i in range(self.board_size)] for j in range(self.board_size)]
             
 
