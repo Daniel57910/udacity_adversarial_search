@@ -34,5 +34,6 @@ class TestPlayer(unittest.TestCase):
     def test_get_all_legal_moves_with_gamestate(self):
         self.player.pos(2, 2)
         grid = self.game_state.grid
+        grid[2][2] = "!"
         print(grid)
         
