@@ -15,23 +15,13 @@ class Player:
 
     def identify_legal_actions(self, grid: list):
         possible_actions = self._all_actions()
-        subsets = {}
+        subsets = []
         for base in self.basis:
-          subsets[base] = [grid[x][y] for (x, y) in possible_actions[base]]
+          subset = [grid[x][y] for (x, y) in possible_actions[base]]
+          subsets.extend(action_resolve(subset, possible_actions[base], self.symbol))
         
-        print(subsets)
-
+        return subsets
       
-        vertical_subset = [grid[x][y] for (x, y) in possible_actions["vertical"]]
-        horizontal_subset = [grid[x][y] for (x, y) in possible_actions["horizontal"]]
-        diag_subset = [grid[x][y] for (x, y) in possible_actions["diag"]]
-        neg_diag_subset = [grid[x][y] for (x, y) in possible_actions["neg_diag"]]
-        legal_vertical = action_resolve(vertical_subset, possible_actions["vertical"], self.symbol)
-        legal_horizontal = action_resolve(horizontal_subset, possible_actions["horizontal"], self.symbol)
-        legal_diag = action_resolve(diag_subset, possible_actions["diag"], self.symbol)
-        legal_neg_diag = action_resolve(neg_diag_subset, possible_actions["neg_diag"], self.symbol)
-        return legal_vertical + legal_horizontal + legal_diag + legal_neg_diag
-
     def _all_actions(self) -> dict:
         actions = {}
         x, y = self.loc["X"], self.loc["Y"]
