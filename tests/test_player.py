@@ -69,8 +69,7 @@ class TestPlayer(unittest.TestCase):
       grid[2][2] = "!"
       grid[2][1] = "!"
       grid[2][3] = "!"
-      for (a, b) in filled_values:
-        grid[a][b] = "X"
+      grid = self._fill_values(grid)
       print("\n")
       for g in grid:
         print(g)
@@ -78,3 +77,7 @@ class TestPlayer(unittest.TestCase):
       legal_actions = self.player.identify_legal_actions(grid)
       print(legal_actions)
       self.assertTrue(all(a in legal_actions for a in legal_values))
+
+    def _fill_values(self, grid, filled_values):
+      for (a, b) in filled_values: grid[a][b] = "X"
+      return grid
