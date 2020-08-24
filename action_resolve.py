@@ -3,6 +3,9 @@ import pdb
 def action_resolve(action_subset: list, coord: list, symbol: str) -> list:
   if not action_subset:
     return []
+
+  if symbol not in action_subset:
+    return []
   symbol_index = action_subset.index(symbol)
   action_length = len(action_subset)
   lower_bound, upper_bound = divide(action_subset, symbol_index, action_length)
