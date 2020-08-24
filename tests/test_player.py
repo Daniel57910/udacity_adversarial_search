@@ -39,3 +39,4 @@ class TestPlayer(unittest.TestCase):
         for (a, b) in filled_values:
             grid[a][b] = "X"
         legal_vertical_actions = self.player.identify_legal_actions(grid)
+        self.assertEqual(legal_vertical_actions, [(3, 2)])

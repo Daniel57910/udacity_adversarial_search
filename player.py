@@ -1,5 +1,7 @@
 import copy
 import time
+from action_resolve import action_resolve
+
 class Player:
     def __init__(self, symbol: str, board_size=5):
         self.symbol = symbol
@@ -13,8 +15,9 @@ class Player:
 
     def identify_legal_actions(self, grid: list):
         possible_actions = self._all_actions()
-        vertical_actions = [grid[x][y] for (x, y) in possible_actions["vertical"]]
-        print(vertical_actions)
+        vertical_subset = [grid[x][y] for (x, y) in possible_actions["vertical"]]
+        legal_actions = action_resolve(vertical_subset, possible_actions["vertical"], self.symbol) 
+        return legal_actions
 
     def _all_actions(self) -> dict:
         actions = {}
@@ -52,3 +55,5 @@ class Player:
             neg_diag.append((x_pos, y_neg))
         
         return diag, neg_diag
+
+
