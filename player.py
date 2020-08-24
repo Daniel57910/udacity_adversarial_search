@@ -2,6 +2,7 @@ import copy
 import time
 from action_resolve import action_resolve
 import pdb
+
 class Player:
     def __init__(self, symbol: str, board_size=5):
         self.symbol = symbol

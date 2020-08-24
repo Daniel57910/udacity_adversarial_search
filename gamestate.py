@@ -13,19 +13,8 @@ class GameState:
     
     def actions(self):
         current_player = self.players[self.player()]
-        actions = current_player.identify_legal_actions
-        
-        """ Return a list of legal actions for the active player 
-        
-        You are free to choose any convention to represent actions,
-        but one option is to represent actions by the (row, column)
-        of the endpoint for the token. For example, if your token is
-        in (0, 0), and your opponent is in (1, 0) then the legal
-        actions could be encoded as (0, 1) and (0, 2).
-        """
-        # TODO: Finish this function!
-        pass
-    
+        return current_player.identify_legal_actions()
+
     def player(self):
         self.player_count += 1
         return self.player_count % 2
