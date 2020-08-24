@@ -38,4 +38,4 @@ class TestPlayer(unittest.TestCase):
         filled_values = [(1, 2), (2, 4), (3, 4), (4, 2)]
         for (a, b) in filled_values:
             grid[a][b] = "X"
-        self.player.identify_legal_actions(grid)
+        legal_vertical_actions = self.player.identify_legal_actions(grid)

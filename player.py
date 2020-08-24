@@ -5,14 +5,16 @@ class Player:
         self.symbol = symbol
         self.loc = {"X": None, "Y": None}
         self.board_size = board_size
+        self.basis = ["horizontal", "vertical", "diag", "neg_diag"]
     
     def pos(self, x: int, y: int):
         self.loc["X"] = x
         self.loc["Y"] = y
 
-    def identify_legal_actions(self, grid: dict):
+    def identify_legal_actions(self, grid: list):
         possible_actions = self._all_actions()
-        print(possible_actions)
+        vertical_actions = [grid[x][y] for (x, y) in possible_actions["vertical"]]
+        print(vertical_actions)
 
     def _all_actions(self) -> dict:
         actions = {}
