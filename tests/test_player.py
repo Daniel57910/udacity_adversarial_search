@@ -43,6 +43,23 @@ class TestPlayer(unittest.TestCase):
         for g in grid:
           print(g)
         legal_values = [(3, 2), (2, 0), (2, 1), (2, 3), (0, 0), (1, 1), (3, 3), (4, 4), (0, 4), (1, 3), (3, 1), (4, 0)]
-        legal_vertical_actions = self.player.identify_legal_actions(grid)
-        print(legal_vertical_actions)
-        self.assertTrue(all(a in legal_vertical_actions for a in legal_values))
+        legal_actions = self.player.identify_legal_actions(grid)
+        print(legal_actions)
+        self.assertTrue(all(a in legal_actions for a in legal_values))
+      
+    def test_get_all_moves_on_leftward_edge_constrained(self):
+      self.player.pos(4, 0)
+      grid = self.game_state.grid
+      filled_values = [(0, 0), (0, 1), (0, 2), (0, 3), (3, 4), (1, 0), (2, 0), (3, 0), (4, 4)]
+      legal_values = [(0, 4), (1, 3), (2, 2), (3, 1), (4, 1), (4, 2), (4, 3)]
+      grid[4][0] = "!"
+      for (a, b) in filled_values:
+        grid[a][b] = "X"
+      print("\n")
+      for g in grid:
+        print(g)
+      legal_actions = self.player.identify_legal_actions(grid)
+      print(legal_actions)
+      self.assertTrue(all(a in legal_actions for a in legal_values))
+    
+  
