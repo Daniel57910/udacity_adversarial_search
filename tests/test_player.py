@@ -38,5 +38,11 @@ class TestPlayer(unittest.TestCase):
         filled_values = [(1, 2), (2, 4), (3, 4), (4, 2)]
         for (a, b) in filled_values:
             grid[a][b] = "X"
+
+        print("\n")
+        for g in grid:
+          print(g)
+        legal_values = [(3, 2), (2, 0), (2, 1), (2, 3), (0, 0), (1, 1), (3, 3), (4, 4), (0, 4), (1, 3), (3, 1), (4, 0)]
         legal_vertical_actions = self.player.identify_legal_actions(grid)
-        self.assertEqual(legal_vertical_actions, [(3, 2)])
+        print(legal_vertical_actions)
+        self.assertTrue(all(a in legal_vertical_actions for a in legal_values))
