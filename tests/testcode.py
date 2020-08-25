@@ -21,6 +21,7 @@ class TestGameState(unittest.TestCase):
         self.gamestate.grid = self._fill_values(self.gamestate.grid, filled_values)
         self.gamestate.grid[2][2] = "!"
         self.player_count = 1
+        self.gamestate.players[1].pos(2, 2)
         grid = self.gamestate.result((3, 1))
         self._print(grid)
         self.assertEqual(grid[3][1], "!")
@@ -30,12 +31,23 @@ class TestGameState(unittest.TestCase):
         self.gamestate.grid = self._fill_values(self.gamestate.grid, filled_values)
         self.gamestate.grid[2][2] = "!"
         self.player_count = 1
+        self.gamestate.players[1].pos(2, 2)
         grid = self.gamestate.result((2, 4))
         self._print(grid)
         self.assertEqual(grid[2][4], "!")
     
     def test_raise_error_on_action_not_allowed(self):
-        return True
+        filled_values = [(0, 0), (0, 1), (0, 2), (0, 3), (3, 4), (1, 0), (2, 0), (3, 0), (4, 4)]
+        self.gamestate.grid = self._fill_values(self.gamestate.grid, filled_values)
+        self.gamestate.grid[2][2] = "!"
+        self.player_count = 1
+        self.gamestate.players[1].pos(2, 2)
+        with self.assertRaises(Exception) as e:
+            self.gamestate.result((4, 4))
+        
+        print(str(e.exception))
+        self.assertTrue("Space already occupied" in str(e.exception))
+    
 
 
     def _fill_values(self, grid, filled_values):

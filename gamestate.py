@@ -1,5 +1,6 @@
 from player import Player
 import copy
+import pdb
 
 class GameState:
 
@@ -11,7 +12,7 @@ class GameState:
 
     def actions(self):
         current_player = self.players[self.player_count]
-        return current_player.identify_legal_actions()
+        return current_player.identify_legal_actions(self.grid)
 
     def player(self):
         self.player_count += 1
@@ -20,8 +21,13 @@ class GameState:
     def result(self, action):
         grid = copy.deepcopy(self.grid)
         y, x = action[0], action[1]
+        allowed_actions = self.actions()
+        if action not in allowed_actions:
+            raise Exception("Space already occupied")
+    
         grid[y][x] = self.players[self.player_count].symbol
         return grid
+
     def terminal_test(self):
         return not self.actions()
     
