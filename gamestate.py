@@ -31,7 +31,7 @@ class GameState:
     def terminal_test(self):
         return not self.actions()
     
-    def liberties(self, loc):
+    def liberties(self, loc=None):
         """ Return a list of all open cells in the
         neighborhood of the specified location.  The list 
         should include all open spaces in a straight line

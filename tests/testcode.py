@@ -45,7 +45,6 @@ class TestGameState(unittest.TestCase):
         with self.assertRaises(Exception) as e:
             self.gamestate.result((4, 4))
         
-        print(str(e.exception))
         self.assertTrue("Space already occupied" in str(e.exception))
     
 
