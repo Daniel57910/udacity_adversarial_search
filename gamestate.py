@@ -1,4 +1,5 @@
 from player import Player
+import copy
 
 class GameState:
 
@@ -7,10 +8,7 @@ class GameState:
         self.board_size = 5
         self.grid = self._build_grid()
         self.players = [Player("X"), Player("!")]
-        self.player_1 = Player("X")
-        self.player_2 = Player("!")
 
-    
     def actions(self):
         current_player = self.players[self.player()]
         return current_player.identify_legal_actions()
@@ -18,20 +16,12 @@ class GameState:
     def player(self):
         self.player_count += 1
         return self.player_count % 2
-        
-
-
     
     def result(self, action):
-        """ Return a new state that results from applying the given
-        action in the current state
-        
-        Hint: Check out the deepcopy module--do NOT modify the
-        objects internal state in place
-        """
-        # TODO: Finish this function!
-        pass
-    
+        grid = copy.deepcopy(self.grid)
+        y, x = action[0], action[1]
+        grid[y][x] = self.players[self.player_count].symbol
+        return grid
     def terminal_test(self):
         return not self.actions()
     

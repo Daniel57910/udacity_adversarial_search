@@ -8,7 +8,7 @@ class TestGameState(unittest.TestCase):
         self.gamestate = GameState()
     
     def test_n_n_grid_as_board_created(self):
-        self.assertEqual(self.gamestate.grid["values"][0][1], ".")
+        self.assertEqual(self.gamestate.grid[0][1], ".")
 
     def test_returns_correct_player(self):
         id_1, id_2 = self.gamestate.player(), self.gamestate.player()
@@ -16,14 +16,35 @@ class TestGameState(unittest.TestCase):
         self.assertEqual(id_2, 1)
         self.assertEqual(self.gamestate.player(), 0)
     
-    def test_terminate_false_2_2_grid(self):
+    def test_allow_legal_action_diagonal(self):
+        filled_values = [(0, 0), (0, 1), (0, 2), (0, 3), (3, 4), (1, 0), (2, 0), (3, 0), (4, 4)]
+        self.gamestate.grid = self._fill_values(self.gamestate.grid, filled_values)
+        self.gamestate.grid[2][2] = "!"
+        self.player_count = 1
+        grid = self.gamestate.result((3, 1))
+        self._print(grid)
+        self.assertEqual(grid[3][1], "!")
+    
+    def test_legal_action_horizontal(self):
+        filled_values = [(0, 0), (0, 1), (0, 2), (0, 3), (3, 4), (1, 0), (2, 0), (3, 0), (4, 4)]
+        self.gamestate.grid = self._fill_values(self.gamestate.grid, filled_values)
+        self.gamestate.grid[2][2] = "!"
+        self.player_count = 1
+        grid = self.gamestate.result((2, 4))
+        self._print(grid)
+        self.assertEqual(grid[2][4], "!")
+    
+    def test_raise_error_on_action_not_allowed(self):
         return True
 
-    def test_terminate_true_5_5_grid(self):
-        return True
 
-    def test_terminate_false_5_5_grid(self):
-        return True
+    def _fill_values(self, grid, filled_values):
+      for (a, b) in filled_values: grid[a][b] = "X"
+      return grid
+    
+    def _print(self, grid):
+      print("\n")
+      for g in grid: print(g)
 
 
 
