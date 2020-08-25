@@ -10,7 +10,7 @@ class GameState:
         self.players = [Player("X"), Player("!")]
 
     def actions(self):
-        current_player = self.players[self.player()]
+        current_player = self.players[self.player_count]
         return current_player.identify_legal_actions()
 
     def player(self):
