@@ -47,8 +47,21 @@ class TestGameState(unittest.TestCase):
         
         self.assertTrue("Space already occupied" in str(e.exception))
     
-
-
+    def test_liberties_open_board(self):
+        self.gamestate.grid[2][2] = "!"
+        self._print(self.gamestate.grid)
+        liberties = self.gamestate.liberties((4, 4))
+        samples = [(0, 4), (0, 0), (4, 0), (3, 3), (1, 1)]
+        self.assertTrue(all(s for s in samples for s in liberties))
+        
+    def test_liberties_closed_board(self):
+        filled_values = [(0, 0), (0, 1), (0, 2), (0, 3), (0, 4), (1, 4), (2, 4), (3, 4), (4, 4), (4, 3), (4, 2), (4, 1), (4, 0), (1, 0), (2, 0), (3, 0)]
+        self.gamestate.grid = self._fill_values(self.gamestate.grid, filled_values)
+        self._print(self.gamestate.grid)
+        liberties = self.gamestate.liberties((2, 2))
+        samples = [(1, 2), (1, 3), (1, 1), (2, 1), (2, 3), (2, 2), (3, 2), (3, 3), (3, 1)]
+        self.assertTrue(all(s for s in samples for s in liberties))
+    
     def _fill_values(self, grid, filled_values):
       for (a, b) in filled_values: grid[a][b] = "X"
       return grid

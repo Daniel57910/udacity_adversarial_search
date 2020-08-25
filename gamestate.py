@@ -1,4 +1,5 @@
 from player import Player
+from action import Action
 import copy
 import pdb
 
@@ -32,6 +33,9 @@ class GameState:
         return not self.actions()
     
     def liberties(self, loc=None):
+        action = Action(loc, self.grid)
+        return action.liberties()
+
         """ Return a list of all open cells in the
         neighborhood of the specified location.  The list 
         should include all open spaces in a straight line
